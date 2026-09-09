@@ -1,0 +1,36 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "typescript.preferences.importModuleSpecifier": "relative",
+  
+  // Jest Extension Settings for TDD
+  "jest.autoRun": {
+    "watch": true,
+    "onStartup": ["all-tests"]
+  },
+  "jest.showCoverageOnLoad": true,
+  
+  // TDD Workflow
+  "terminal.integrated.env.osx": {
+    "TDD": "true"
+  },
+  
+  // Test Explorer
+  "testExplorer.showOnRun": true,
+  "testExplorer.addToEditorContextMenu": true,
+  
+  // File Associations
+  "files.associations": {
+    "*.test.ts": "typescript",
+    "*.test.tsx": "typescriptreact"
+  },
+  
+  // Workspace recommendations
+  "recommendations": [
+    "orta.vscode-jest",
+    "firsttris.vscode-jest-runner",
+    "humao.rest-client"
+  ]
+}

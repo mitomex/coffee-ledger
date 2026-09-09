@@ -1,0 +1,115 @@
+{
+  "TDD Component Test Template": {
+    "prefix": "tdd-component",
+    "body": [
+      "import { render, screen, waitFor } from '@/__tests__/utils/test-utils'",
+      "import userEvent from '@testing-library/user-event'",
+      "import ${1:ComponentName} from '../${1:ComponentName}'",
+      "",
+      "describe('${1:ComponentName}', () => {",
+      "  beforeEach(() => {",
+      "    jest.clearAllMocks()",
+      "  })",
+      "",
+      "  // 🔴 RED: Write failing test first",
+      "  it('should ${2:behavior description}', async () => {",
+      "    // Arrange",
+      "    const user = userEvent.setup()",
+      "    render(<${1:ComponentName} />)",
+      "    ",
+      "    // Act",
+      "    ${3:// Add action}",
+      "    ",
+      "    // Assert",
+      "    expect(${4:assertion}).toBe(${5:expected})",
+      "  })",
+      "",
+      "  // 🟢 GREEN: Make it pass with minimal code",
+      "  // 🔄 REFACTOR: Improve code quality",
+      "})"
+    ],
+    "description": "TDD template for React component testing"
+  },
+  
+  "TDD Utility Test Template": {
+    "prefix": "tdd-util",
+    "body": [
+      "import { ${1:functionName} } from '../${2:fileName}'",
+      "",
+      "describe('${1:functionName}', () => {",
+      "  // 🔴 RED: Write failing test first",
+      "  describe('normal cases', () => {",
+      "    it('should ${3:behavior description}', () => {",
+      "      // Arrange",
+      "      const input = ${4:testInput}",
+      "      ",
+      "      // Act",
+      "      const result = ${1:functionName}(input)",
+      "      ",
+      "      // Assert",
+      "      expect(result).toBe(${5:expected})",
+      "    })",
+      "  })",
+      "",
+      "  describe('edge cases', () => {",
+      "    it('should handle null input', () => {",
+      "      expect(${1:functionName}(null)).toBeNull()",
+      "    })",
+      "",
+      "    it('should handle empty input', () => {",
+      "      expect(${1:functionName}('')).toBe('')",
+      "    })",
+      "  })",
+      "",
+      "  describe('error cases', () => {",
+      "    it('should throw error for invalid input', () => {",
+      "      expect(() => ${1:functionName}(invalid)).toThrow()",
+      "    })",
+      "  })",
+      "",
+      "  // 🟢 GREEN: Make it pass with minimal code",
+      "  // 🔄 REFACTOR: Improve code quality",
+      "})"
+    ],
+    "description": "TDD template for utility function testing"
+  },
+  
+  "TDD Test Case": {
+    "prefix": "tdd-test",
+    "body": [
+      "// 🔴 RED: Write failing test first",
+      "it('should ${1:behavior description}', () => {",
+      "  // Arrange",
+      "  const ${2:input} = ${3:value}",
+      "  ",
+      "  // Act",
+      "  const result = ${4:functionCall}",
+      "  ",
+      "  // Assert",
+      "  expect(result).${5:toBe}(${6:expected})",
+      "})"
+    ],
+    "description": "Single TDD test case"
+  },
+  
+  "TDD Async Test": {
+    "prefix": "tdd-async",
+    "body": [
+      "// 🔴 RED: Write failing test first",
+      "it('should ${1:behavior description}', async () => {",
+      "  // Arrange",
+      "  const ${2:mockData} = ${3:value}",
+      "  ${4:mockFunction}.mockResolvedValue(${2:mockData})",
+      "  ",
+      "  // Act",
+      "  const result = await ${5:asyncFunction}()",
+      "  ",
+      "  // Assert",
+      "  await waitFor(() => {",
+      "    expect(${6:assertion}).toBe(${7:expected})",
+      "  })",
+      "})"
+    ],
+    "description": "TDD async test case"
+  }
+}

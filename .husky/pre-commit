@@ -1,0 +1,46 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# TDD Check: 新しいコンポーネントやユーティリティにはテストが必要
+echo "🔴 TDD Check: Verifying test coverage for new code..."
+
+# 変更されたTypeScriptファイルを取得
+CHANGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts|tsx)$' | grep -v test | grep -v spec)
+
+if [ -n "$CHANGED_FILES" ]; then
+  for FILE in $CHANGED_FILES; do
+    # テストファイルのパスを生成
+    DIR=$(dirname "$FILE")
+    BASENAME=$(basename "$FILE" | sed 's/\.\(ts\|tsx\)$//')
+    TEST_FILE="${DIR}/__tests__/${BASENAME}.test"
+    
+    # テストファイルが存在するかチェック
+    if [ ! -f "${TEST_FILE}.ts" ] && [ ! -f "${TEST_FILE}.tsx" ]; then
+      echo "❌ TDD Violation: No test file found for $FILE"
+      echo "   Expected test file: ${TEST_FILE}.ts(x)"
+      echo ""
+      echo "   Please create a test file first (RED phase):"
+      echo "   1. Write failing tests in ${TEST_FILE}.ts(x)"
+      echo "   2. Run 'npm test' to confirm tests fail"
+      echo "   3. Then implement the feature (GREEN phase)"
+      echo ""
+      echo "   See TDD_GUIDELINES.md for details"
+      exit 1
+    fi
+    
+    # テストが実行されているかチェック
+    echo "✅ Test file found for $FILE"
+  done
+fi
+
+# テストを実行
+echo "🧪 Running tests..."
+npm test -- --passWithNoTests --silent
+
+if [ $? -ne 0 ]; then
+  echo "❌ Tests failed. Please fix failing tests before committing."
+  echo "   Run 'npm test' to see detailed errors"
+  exit 1
+fi
+
+echo "✅ All tests passed! TDD compliance verified."

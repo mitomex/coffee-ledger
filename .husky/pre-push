@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔴 TDD Pre-push Check: Verifying test coverage..."
+
+# テストカバレッジをチェック
+npm test -- --coverage --silent
+
+if [ $? -ne 0 ]; then
+  echo "❌ Tests failed. Cannot push code with failing tests."
+  exit 1
+fi
+
+echo "✅ All tests passed. Pushing to remote..."
