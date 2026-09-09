@@ -16,8 +16,6 @@
       "Read(.env.*)",
       "Edit(.env)",
       "Edit(.env.*)",
-      "Write(.env)",
-      "Write(.env.*)",
       "Bash(cat .env*)",
       "Bash(head .env*)",
       "Bash(tail .env*)",
